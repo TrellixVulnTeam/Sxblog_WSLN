@@ -4,3 +4,4 @@
 
 演示站点：blog.bj.cn
 启动只需要将网站放到/home/flask下，然后运行start.sh就可以启动项目了。默认端口号是80.
+<img class="index-logo-src" src="//www.baidu.com/img/flexible/logo/pc/result.png" alt="到百度首页" title="到百度首页">
