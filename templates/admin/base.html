@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title.title }} - {{ title.discription }}</title>
+{% block header %}
+{% endblock %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin/css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin/css/style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin/css/login.css') }}">
+<link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='admin/images/icon/icon.png') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='admin/images/icon/favicon.ico') }}">
+<script src="{{ url_for('static', filename='admin/js/jquery-2.1.4.min.js') }}"></script>
+</head>
+
+<body class="user-select">
+<section class="container-fluid">
+  <header>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">{{ title.title }}</a> </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ url_for('logout')}}">退出登录</a></li>
+          </ul>
+          <form action="{{ url_for('adminsearch') }}" method="get" class="navbar-form navbar-right">
+            <div class="input-group">
+              <input type="text" class="form-control" autocomplete="off" placeholder="键入关键字搜索" maxlength="15" name="search">
+              <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">搜索</button>
+              </span> </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="row">
+    <aside class="col-sm-3 col-md-2 col-lg-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li><a href="{{ url_for('admin') }}">文章</a></li>
+        <li><a href="{{ url_for('admincomment') }}">评论</a></li>
+		<li><a href="{{ url_for('addfriend')}}">连接</a></li>
+		<li><a href="{{ url_for('addcategory')}}">分类</a></li>
+      </ul>
+	  <hr>
+      <ul class="nav nav-sidebar">
+		<li><a href="{{ url_for('setting')}}">设置</a></li>
+      </ul>
+    </aside>
+    {% block content %}
+    {% endblock %}
+  </div>
+</section>
+<script src="{{ url_for('static', filename='admin/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='admin/js/admin-scripts.js') }}"></script>
+{% block script %}
+{% endblock %}
+</body>
+</html>

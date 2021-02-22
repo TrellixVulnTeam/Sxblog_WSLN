@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}
+			<title>{{article.title}} - {{ title.title }} - {{ title.discription }}</title>
+{% endblock %}
+{% block content %}
+                    <div class="col-lg-8">
+                        <div class="post card">
+                            <div class="card-body">
+                                <div class="post-header border-bottom border-light mb-4 pb-4">
+                                    <h1 class="h3 mb-3">{{ article.title }}</h1>
+                                    <div class="meta d-flex align-items-center text-xs text-muted">
+                                        <div>
+                                            <time class="d-inline-block">{{ article.created }}</time></div>
+                                        <div class="ml-auto text-sm">
+                                            <span class="mx-1">
+                                                <i class="text-md iconfont icon-eye-line mx-1"></i>
+                                                <small><a href="/category/{{ category[1] }}">{{ category[0] }}</a></small></span>
+                                        </div>
+                                    </div>
+                                    <div class="border-theme bg-primary"></div>
+                                </div>
+                                <div class="post-content">
+                                    <p>{{ article.content | safe }}</p>
+                                </div>
+                            </div>
+                            <div class="card-footer pt-0 border-0">
+                                <div id="post-share-section" class="d-flex align-items-center justify-content-between justify-content-md-start text-center text-md-left py-2">
+                                    <a href="javascript:;" class="plus-power-popup mr-md-4">
+                                        <i class="text-xl iconfont icon-exchange-dollar-fill"></i>
+                                    </a>
+                                    <div id="plus-power-popup-wrap">
+                                        <div class="popup-inner">
+                                            <div class="content p-4">
+                                                <div class="plus-power-tabcontent">
+                                                    <div class="item-qrcode">
+                                                        <img src="{{ url_for('static', filename='images/shoukuan.png') }}" alt="打赏"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--ad-->
+                        <!--<div class="paid-share my-lg-4 d-lg-block"></div>-->
+                        <!--ad-->
+                        <section class="list-related">
+                            <div class="mx-1 my-3">
+                                <i class="text-xl text-primary iconfont icon-refresh-line mr-2"></i>相关文章</div>
+                            <div class="content-related card">
+                                <div class="card-body">
+                                    <div class="list list-dots my-n2">
+										{% for recommend in recommends %}
+											<div class="list-item py-2">
+												<a href="{{ recommend.link }}" target="_blank" class="list-title h-2x">{{ recommend.title|truncate(length=100)}}</a>
+											</div>
+										{% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+						<div id="comments" class="comments">
+							<div class="mx-1 my-3">
+								<i class="text-xl text-primary iconfont icon-message--line mr-2"></i>评论
+								<small class="font-theme text-muted">({{ comment_count[0] }})</small></div>
+							<div class="card">
+								<div id="comments">
+									<div id="respond-page-2" class="respond">
+										<div class="cancel-comment-reply"></div>
+										<h3 id="response" class="comment-reply-title">发表评论</h3>
+										<form id="new_comment_form" method="post" action="" _lpchecked="1">
+											<div class="new_comment">
+												<textarea name="text" rows="3" class="textarea_box" style="height: auto;" placeholder="您的评论可以一针见血..."></textarea>
+											</div>
+											<div class="comment_triggered" style="display: block;">
+												<div class="input_body">
+													<ul class="ident">
+														<li>
+															<input type="text" name="author" placeholder="昵称*" value="" required="required"></li>
+														<li>
+															<input type="mail" name="email" placeholder="邮件*" value="" required="required"></li>
+														<li>
+															<input type="text" name="url" placeholder="网址" value=""></li>
+													</ul>
+													<input type="submit" value="提交评论" class="comment_submit_button c_button"></div>
+											</div>
+											<input type="hidden" name="_" value="3e8611536fa2eeb625256793b977eae3"></form>
+									</div>
+									<ol class="comment-list">
+										<li id="li-comment-6" class="comment comment-parent comment-odd comment-by-author">
+											<div id="comment-6" class="comment-body">
+												{% for comment in comments %}
+													<div class="comment-author">
+														<img src="{{ url_for('static', filename='images/comment.png') }}" width="45px" height="45px" style="border-radius: 50%;">
+														<cite class="fn">
+															<a href="{{ comment.website }}" rel="external nofollow" target="_blank">{{ comment.username }}</a> 发表于 {{ comment.created }}：</cite>
+														<span class="says"></span>
+													</div>
+													<p>{{ comment.comment }}</p>
+													<div class="reply">
+														<span class="comment-reply-link"></span>
+													</div>
+												    <hr>
+												{% endfor %}
+											</div>
+										</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+                    </div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "admin/base.html" %}
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+      <div class="row">
+        <form action="" method="post" class="add-article-form">
+          <div class="col-md-9">
+            <h1 class="page-header">网站设置</h1>
+            <div class="form-group">
+              <label for="article-title" class="sr-only">网站标题</label>
+              <input type="text" id="article-title" name="title" class="form-control" placeholder="在此处输入标题" required autofocus autocomplete="off" value="{{ admin_setting[0].title }}">
+            </div>
+            <div class="form-group">
+              <label for="article-content" class="sr-only">关于描述</label>
+              <textarea id="editor" name="about" class="form-control">{{ admin_setting[0].about }}</textarea> 
+            </div>
+            <div class="add-article-box">
+              <h2 class="add-article-box-title"><span>关键字</span></h2>
+              <div class="add-article-box-content">
+              	<input type="text" class="form-control" placeholder="请输入关键字" name="keywords" autocomplete="off" value="{{ admin_setting[0].keywords }}">
+                <span class="prompt-text">多个标签请用英文逗号,隔开。</span>
+              </div>
+            </div>
+            <div class="add-article-box">
+              <h2 class="add-article-box-title"><span>描述</span></h2>
+              <div class="add-article-box-content">
+              	<textarea class="form-control" name="discription" autocomplete="off">{{ admin_setting[0].discription }}</textarea>
+                <span class="prompt-text">描述是可选的手工创建的内容总结，并可以在网页描述中使用</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <h1 class="page-header">操作</h1>
+            <div class="add-article-box">
+              <h2 class="add-article-box-title"><span>发布</span></h2>
+              <div class="add-article-box-content">
+              	<p><label>状态：</label><span class="article-status-display">已发布</span></p>
+              </div>
+              <div class="add-article-box-footer">
+                <button class="btn btn-primary" type="submit" name="submit" onclick="he.sync();">发布</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript" src="{{ url_for('static', filename='admin/editor/HandyEditor.min.js') }}"></script>
+<script type="text/javascript">
+  var he = HE.getEditor('editor',{
+  item:['bold','italic','strike','underline','fontSize','fontName','paragraph','color','backColor','|','center','left','right','full','indent','outdent','|','link','unlink','textBlock','code','selectAll','removeFormat','trash','|','image','expression','subscript','superscript','horizontal','|','undo','redo','|','html']
+  });
+  function getHtml(){
+    alert(he.getHtml());
+  }
+  function getText(){
+    alert(he.getText());
+  }
+</script>
+{% endblock %}

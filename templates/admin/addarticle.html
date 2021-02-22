@@ -1,0 +1,76 @@
+{% extends "admin/base.html" %}
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+      <div class="row">
+        <form action="" method="post" class="add-article-form">
+          <div class="col-md-9">
+            <h1 class="page-header">撰写新文章</h1>
+            <div class="form-group">
+              <label for="article-title" class="sr-only">标题</label>
+              <input type="text" id="article-title" name="title" class="form-control" placeholder="在此处输入标题" required autofocus autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label for="article-content" class="sr-only">内容</label>
+			  <textarea id="editor" name="editor" rows="5" style="display: none;"></textarea>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <h1 class="page-header">操作</h1>
+            <div class="add-article-box">
+              <h2 class="add-article-box-title"><span>栏目</span></h2>
+              <div class="add-article-box-content">
+                <ul class="category-list">
+				  {% for name in category_nav %}
+                    <li>
+                      <label>
+                        <input name="category" type="radio" value = "{{ name.id }}">
+                        {{ name.name }} <em class="hidden-md">( 栏目ID: <span>{{ name.id }}</span> )</em></label>
+                    </li>
+				  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            <div class="add-article-box">
+              <h2 class="add-article-box-title"><span>标签</span></h2>
+              <div class="add-article-box-content">
+                <input type="text" class="form-control" placeholder="输入新标签" name="tags" autocomplete="off">
+                <span class="prompt-text">定义首页文章标题左侧小图标</span> </div>
+            </div>
+            <!--<div class="add-article-box">
+              <h2 class="add-article-box-title"><span>标题图片</span></h2>
+              <div class="add-article-box-content">
+                <input type="text" class="form-control" placeholder="点击按钮选择图片" id="pictureUpload" name="titlepic" autocomplete="off">
+              </div>
+              <div class="add-article-box-footer">
+                <button class="btn btn-default" type="button" ID="upImage">选择</button>
+              </div>
+            </div>-->
+            <div class="add-article-box">
+              <h2 class="add-article-box-title"><span>发布</span></h2>
+              <div class="add-article-box-content">
+              	<p><label>状态：</label><span class="article-status-display">未发布</span></p>
+                <p><label>发布于：</label><span class="article-time-display"><input style="border: none;" type="datetime" name="time" value="{{ created}}" /></span></p>
+              </div>
+              <div class="add-article-box-footer">
+                <button class="btn btn-primary" type="submit" name="submit" id="submit" onclick="he.sync();">发布</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript" src="{{ url_for('static', filename='admin/editor/HandyEditor.min.js') }}"></script>
+<script type="text/javascript">
+  var he = HE.getEditor('editor',{
+  item:['bold','italic','strike','underline','fontSize','fontName','paragraph','color','backColor','|','center','left','right','full','indent','outdent','|','link','unlink','textBlock','code','selectAll','removeFormat','trash','|','image','expression','subscript','superscript','horizontal','|','undo','redo','|','html','addbr']
+  });
+  function getHtml(){
+    alert(he.getHtml());
+  }
+  function getText(){
+    alert(he.getText());
+  }
+</script>
+{% endblock %}

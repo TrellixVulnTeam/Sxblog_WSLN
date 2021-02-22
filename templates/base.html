@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="transform: none;">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="renderer" content="webkit">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		{% block title %}
+			<title>{{ title.title }} - {{ title.discription }}</title>
+		{% endblock %}
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/jimu.css') }}" type="text/css" media="all">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/iconfont.css') }}" type="text/css" media="all">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/splity.css') }}" type="text/css" media="all">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" media="all">
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+		{% block header %}
+		{% endblock %}
+        <meta name="description" content="{{ title.discription }}">
+        <meta name="keywords" content="{{ title.keywords }}">
+	</head>
+    
+    <body class="home blog" style="transform: none;">
+        <header class="header">
+            <nav class="navbar navbar-expand-lg shadow">
+                <div class="container">
+                    <a href="{{ url_for('index') }}" rel="home" class="logo navbar-brand order-2 order-lg-1">{{ title.title }}</a>
+                    <button class="navbar-toggler order-1" type="button" id="sidebarCollapse">
+                        <i class="text-xl iconfont icon-menu-line"></i>
+                    </button>
+                    <button class="navbar-toggler nav-search order-3 collapsed" data-target="#navbar-search" data-toggle="collapse" aria-expanded="false" aria-controls="navbar-search">
+                        <i class="text-xl iconfont icon-search-line"></i>
+                        <i class="text-xl iconfont icon-close-fill"></i>
+                    </button>
+                    <div class="collapse navbar-collapse order-md-2">
+                        <ul class="navbar-nav main-menu ml-4 mr-auto">
+                            <li><a href="{{ url_for('index') }}">站点首页</a></li>
+							{% for name in category_nav %}
+								<li><a href="/category/{{ name.id }}/" title="{{ name.name }}">{{ name.name }}</a></li>
+							{% endfor %}
+							<li><a href="{{ url_for('about') }}" title="关于本站">关于本站</a></li>
+                        </ul>
+                        <ul class="navbar-nav align-items-center order-1 order-lg-2">
+                            <li class="nav-item ml-1 ml-md-2">
+                                <a class="btn btn-link btn-icon nav-link nav-search collapsed" href="#navbar-search" data-toggle="collapse" aria-expanded="false">
+                                    <span title="搜索">
+                                        <i class="text-lg iconfont icon-search-line"></i>
+                                        <i class="text-lg iconfont icon-close-fill"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <div class="btn-group ml-2 ml-md-3" role="group">
+                                <a class="btn btn-primary btn-sm" href="{{ url_for('login') }}">登录</a></div>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="mobile-sidebar">
+                <div class="mobile-sidebar-header text-right p-3">
+                    <button class="btn btn-icon sidebar-close">
+                        <span>
+                            <i class="text-xl iconfont icon-radio-button-line"></i>
+                        </span>
+                    </button>
+                </div>
+                <ul class="navbar-nav main-menu ml-4 mr-auto">
+                    <li><a href="{{ url_for('index') }}">站点首页</a></li>
+					{% for name in category_nav %}
+						<li><a href="/category/{{ name.id }}/" title="{{ name.name }}">{{ name.name }}</a></li>
+					{% endfor %}
+					<li><a href="{{ url_for('about') }}" title="关于本站">关于本站</a></li>
+                </ul>
+            </div>
+            <div class="navbar-search collapse " id="navbar-search">
+                <div class="container">
+                    <form method="get" id="searchform" class="searchform shadow" action="{{ url_for('search') }}">
+                        <div class="input-group">
+                            <input type="text" name="s" id="s" placeholder="请输入搜索关键词并按回车键…" class="form-control" autocomplete="off">
+                            <div class="input-group-append">
+                                <button class="btn btn-nostyle" type="submit">
+                                    <i class="text-lg iconfont icon-search-line"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </header>
+        <div class="list-banner list-rounded banner-style-2 banner-has-nav pt-3 pt-md-5">
+            <div class="container">
+                <div class="owl-carousel owl-theme owl-loaded owl-drag">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage" style="transform: translate3d(-3360px, 0px, 0px); transition: all 1s ease 0s; width: 6720px;">
+							{% for hot in hots[0:2] %}
+								<div class="owl-item cloned" style="width: 1110px; margin-right: 10px;">
+									<div class="card item list-item list-overlay-content m-0">
+										<div class="media media-21x9">
+											<a class="media-content" href="{{ hot.link }}">
+												<img class="index-logo-src" src="{{ url_for('static', filename='images/thumbs/') }}{{ hot.hot}}b.jpeg">
+											</a>
+										</div>
+										<div class="list-content p-3 p-md-5 text-center">
+											<div class="list-body">
+												<a href="{{ hot.link }}" target="_blank" class="h4 text-white h-2x m-0">{{ hot.title }}</a></div>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+                        </div>
+                    </div>
+                    <div class="owl-nav">
+                        <button type="button" role="presentation" class="owl-prev">
+                            <i class="iconfont icon-left"></i>
+                        </button>
+                        <button type="button" role="presentation" class="owl-next">
+                            <i class="iconfont icon-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <main class="py-3  pt-md-4 pb-md-5" style="transform: none;">
+            <div class="container" style="transform: none;">
+                <div class="row no-gutters" style="transform: none;">
+					{% block content %}
+					{% endblock %}
+                    <div class="sidebar col-lg-4 pl-lg-4 pl-xl-5 d-none d-lg-block" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+                        <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static; transform: none;">
+                            <div class="card">
+                                <div class="widget-author-cover">
+                                    <div class="media media-2x1">
+                                        <div class="media-content" style="background-image: url(/static/images/banner.jpg);"></div>
+                                    </div>
+                                    <div class="widget-author-avatar">
+                                        <div class="flex-avatar mx-2 w-80 border border-white border-2">
+											<img src="{{ url_for('static', filename='images/head.jpeg') }}" class="avatar" height="80" width="80">
+										</div>
+                                    </div>
+                                </div>
+                                <div class="widget-author-meta text-center p-4">
+                                    <div class="h6 mb-3">王殊勋
+                                        <small class="d-block">
+                                            <span class="badge badge-outline-primary mt-2">IT运维工程师</span></small>
+                                    </div>
+                                    <div class="desc text-xs mb-3 h-2x"></div>
+                                    <div class="row no-gutters text-center">
+                                        <em class="col">
+                                            <span class="font-theme font-weight-bold text-md">{{ article_count[0] }}</span>
+                                            <small class="d-block text-xs text-muted">文章</small></em>
+                                        <em class="col">
+                                            <span class="font-theme font-weight-bold text-md">{{ comment_count[0] }}</span>
+                                            <small class="d-block text-xs text-muted">评论</small></em>
+                                        <em class="col">
+                                            <span class="font-theme font-weight-bold text-md">{{ category_count[0] }}</span>
+                                            <small class="d-block text-xs text-muted">栏目</small></em>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card card-sm widget Recommended_Posts">
+								<div class="card-header widget-header">推荐文章
+									<i class="bg-primary"></i></div>
+								{% for hot in hots[2:7] %}
+									<div class="card-body">
+										<div class="list-rounded my-n2">
+											<div class="py-2">
+												<div class="list-item list-overlay-content">
+													<div class="media media-2x1">
+														<a class="media-content" href="{{ hot.link }}" target="_blank"><img class="index-logo-src" src="{{ url_for('static', filename='images/thumbs/') }}{{ hot.hot }}.jpeg"></a>
+													</div>
+													<div class="list-content">
+														<div class="list-body">
+															<a href="{{ hot.link }}" target="_blank" class="list-title h-2x">{{ hot.title | truncate(length=20) }}</a></div>
+														<div class="list-footer">
+															<div class="text-muted text-xs">
+																<time class="d-inline-block">{{ hot.created }}</time></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								{% endfor %}
+                            </div>
+                        </div>
+                    </div>
+				</div>
+            </div>
+        </main>
+        <footer class="footer bg-dark py-3 py-lg-4">
+            <div class="container">
+                <div class="d-md-flex flex-md-fill align-items-md-center">
+                    <div class="d-md-flex flex-md-column">
+                        <ul class="footer-menu">
+							{% for name in category_nav %}
+								<li><a href="/category/{{ name.id }}/" title="{{ name.name }}">{{ name.name }}</a></li>
+							{% endfor %}
+                        </ul>
+                        <div class="footer-copyright text-xs">Copyright © 2021 | <a href="https://beian.miit.gov.cn/">ICP备:蒙ICP备2021000477号-1 | </a><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=15042902150494"><img border="0" src="{{ url_for('static', filename='images/beian.png') }}" /> 蒙公网安备 15042902150494号</a></div></div>
+                    <div class="flex-md-fill"></div>
+                    <div class="mt-3 mt-md-0"></div>
+                </div>
+                <div class="footer-links border-top border-secondary pt-3 mt-3 text-xs">
+                    <span>友情链接：{% for friend in friends %}<a href="{{ friend.url }}" title="{{ friend.describe }}">{{ friend.title }}</a>{% endfor %}</span></div>
+            </div>
+        </footer>
+        <a href="javascript:void(0)" id="scroll_to_top" class="btn btn-primary btn-icon scroll-to-top">
+            <span>
+                <i class="text-lg iconfont icon-arrow-up-fill"></i>
+            </span>
+        </a>
+        <div class="mobile-overlay"></div>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jimu.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/theia-sticky-sidebar.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/splity.js') }}"></script>
+		{% block script %}
+		{% endblock %}
+	</body>
+</html>

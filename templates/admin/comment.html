@@ -1,0 +1,46 @@
+{% extends "admin/base.html" %}
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+      <form action="/Article/checkAll" method="post" >
+        <h1 class="page-header">管理 <span class="badge">{{ comment_count[0] }}</span></h1>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th><span class="glyphicon glyphicon-file"></span> <span class="visible-lg">标题</span></th>
+				<th><span class="glyphicon glyphicon-list"></span> <span class="visible-lg">文章id</span></th>
+                <th><span class="glyphicon glyphicon-time"></span> <span class="visible-lg">日期</span></th>
+                <th><span class="glyphicon glyphicon-pencil"></span> <span class="visible-lg">操作</span></th>
+              </tr>
+            </thead>
+            <tbody>
+			  {% for comment in admin_comment %}
+                <tr>
+                  <td class="article-title">{{ comment.comment | truncate(length=100) }}</td>
+				  <td><a href=/article/{{comment.articleid}}>{{ comment.articleid }}</a></td>
+                  <td>{{ comment.created }}</td>
+                  <td><a rel="6" href="{{ url_for('commentdelete',id=comment.id) }}">删除</a></td>
+                </tr>
+			  {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <footer class="message_footer">
+          <nav>
+		  	<ul class="pagination pagenav">
+				{% if pagination.has_prev %}
+					<li class="previous"><a href="{{ url_for('admin') }}?page={{ pagination.prev_num }}">&larr; Older</a></li> 
+				{% else %}
+					<li class="previous disabled"><a>&larr; Older</a></li>
+				{% endif %}
+				{% if pagination.has_next %}
+					<li class="next"><a href="{{ url_for('admin') }}?page={{ pagination.next_num }}">Newer &rarr;</a></li>
+				{% else %}
+					<li class="next disable"><a>Newer &rarr;</a></li>
+				{% endif %}
+			</ul>
+          </nav>
+        </footer>
+      </form>
+    </div>
+{% endblock %}

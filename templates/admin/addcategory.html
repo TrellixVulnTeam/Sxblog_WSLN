@@ -1,0 +1,38 @@
+{% extends "admin/base.html" %}
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+      <div class="row">
+        <div class="col-md-5">
+          <h1 class="page-header">添加</h1>
+          <form action="" method="post" autocomplete="off">
+            <div class="form-group">
+              <label for="category-name">分类名称</label>
+              <input type="text" id="category-name" name="name" class="form-control" placeholder="在此处输入分类名称" required autocomplete="off">
+              <span class="prompt-text">这将是它在站点上显示的名字。</span> </div>
+            <button class="btn btn-primary" type="submit" name="submit">添加</button>
+          </form>
+        </div>
+        <div class="col-md-7">
+          <h1 class="page-header">管理 <span class="badge">{{ category_count[0] }}</span></h1>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th><span class="glyphicon glyphicon-file"></span> <span class="visible-lg">分类名称</span></th>
+                  <th><span class="glyphicon glyphicon-pencil"></span> <span class="visible-lg">操作</span></th>
+                </tr>
+              </thead>
+              <tbody>
+			   {% for category in admin_category %}
+                <tr>
+                  <td>{{ category.name | truncate(length=100) }}</td>
+                  <td><a rel="1" href="{{ url_for('categorydelete',id=category.id) }}">删除</a></td>
+                </tr>
+				{% endfor %}
+              </tbody>
+            </table>
+            <span class="prompt-text"><strong>注：</strong>删除分类将无法找回,请谨慎删除!</span> </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

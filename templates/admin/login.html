@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>后台登录 - {{ title.title }} - {{ title.discription }}</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin/css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin/css/style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin/css/login.css') }}">
+<link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='admin/images/icon/icon.png') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='admin/images/icon/favicon.ico') }}">
+<script src="{{ url_for('static', filename='admin/js/jquery-2.1.4.min.js') }}"></script>
+</head>
+
+<body class="user-select" οnlοad="alert(123)">
+<div class="container">
+  <div class="siteIcon"><img src="{{ url_for('static', filename='admin/images/icon/icon.png') }}" alt="" data-toggle="tooltip" data-placement="top" draggable="false" /></div>
+  <form action="" method="post" autocomplete="off" class="form-signin">
+    <h3 class="form-signin-heading">管理员登录</h3>
+	<em>{{ loginerror }}</em>
+    <label for="userName" class="sr-only">用户名</label>
+    <input type="text" id="userName" name="username" class="form-control" placeholder="请输入用户名" required autofocus autocomplete="off" maxlength="10">
+    <label for="userPwd" class="sr-only">密码</label>
+    <input type="password" id="userPwd" name="password" class="form-control" placeholder="请输入密码" required autocomplete="off" maxlength="18">
+    <button class="btn btn-lg btn-primary btn-block" type="submit" id="signinSubmit">登录</button>
+  </form>
+  <div class="footer">
+    <p><a href="{{ url_for('index') }}" data-toggle="tooltip" data-placement="left">回到{{ title.title }}→</a></p>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='admin/js/bootstrap.min.js') }}"></script> 
+</body>
+</html>

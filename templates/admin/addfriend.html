@@ -1,0 +1,50 @@
+{% extends "admin/base.html" %}
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+      <div class="row">
+        <div class="col-md-5">
+          <h1 class="page-header">添加</h1>
+          <form action="" method="post" autocomplete="off">
+            <div class="form-group">
+              <label for="category-name">连接名称</label>
+              <input type="text" id="category-name" name="friends" class="form-control" placeholder="在此处输入链接名称" required autocomplete="off">
+              <span class="prompt-text">这将是它在站点上显示的名字。</span> </div>
+            <div class="form-group">
+              <label for="category-alias">链接地址</label>
+              <input type="text" id="category-alias" name="links" class="form-control" placeholder="在此处输入链接地址" required autocomplete="off">
+              <span class="prompt-text">这将是它在站点上跳转的地址。</span> </div>
+            <div class="form-group">
+              <label for="category-describe">描述</label>
+              <textarea class="form-control" id="category-describe" name="describe" rows="4" autocomplete="off"></textarea>
+              <span class="prompt-text">描述会出现在链接的提示框中。</span> </div>
+            <button class="btn btn-primary" type="submit" name="submit">添加</button>
+          </form>
+        </div>
+        <div class="col-md-7">
+          <h1 class="page-header">管理 <span class="badge">{{ friend_count[0] }}</span></h1>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th><span class="glyphicon glyphicon-file"></span> <span class="visible-lg">标题</span></th>
+                  <th><span class="glyphicon glyphicon-list-alt"></span> <span class="visible-lg">链接</span></th>
+				  <th><span class="glyphicon glyphicon-paperclip"></span> <span class="visible-lg">描述</span></th>
+                  <th><span class="glyphicon glyphicon-pencil"></span> <span class="visible-lg">操作</span></th>
+                </tr>
+              </thead>
+              <tbody>
+			   {% for friend in admin_friend %}
+                <tr>
+                  <td>{{ friend.title | truncate(length=100) }}</td>
+                  <td>{{ friend.url }}</td>
+				  <td>{{ friend.describe }}</td>
+                  <td><a rel="1" href="{{ url_for('frienddelete',id=friend.id) }}">删除</a></td>
+                </tr>
+				{% endfor %}
+              </tbody>
+            </table>
+            <span class="prompt-text"><strong>注：</strong>删除链接将无法找回,请谨慎删除!</span> </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

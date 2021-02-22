@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}
+			<title>关于本站 - {{ title.title }} - {{ title.discription }}</title>
+{% endblock %}
+{% block content %}
+                    <div class="col-lg-8">
+                        <div class="post card">
+                            <div class="card-body">
+                                <div class="post-header border-bottom border-light mb-4 pb-4">
+                                    <h1 class="h3 mb-3">{{ title.notice }}</h1>
+                                    <div class="border-theme bg-primary"></div>
+                                </div>
+                                <div class="post-content">
+                                    <p>{{ title.about|safe }}</p>
+                                </div>
+                            </div>
+                            <div class="card-footer pt-0 border-0">
+                                <div id="post-share-section" class="d-flex align-items-center justify-content-between justify-content-md-start text-center text-md-left py-2">
+                                    <a href="javascript:;" class="plus-power-popup mr-md-4">
+                                        <i class="text-xl iconfont icon-exchange-dollar-fill"></i>
+                                    </a>
+                                    <div id="plus-power-popup-wrap">
+                                        <div class="popup-inner">
+                                            <div class="content p-4">
+                                                <div class="plus-power-tabcontent">
+                                                    <div class="item-qrcode">
+                                                        <img src="{{ url_for('static', filename='images/shoukuan.png') }}" alt="打赏"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+{% endblock %}

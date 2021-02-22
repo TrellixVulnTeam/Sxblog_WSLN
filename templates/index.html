@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}
+			<title>{{ title.title }} - {{ title.discription }}</title>
+{% endblock %}
+{% block content %}
+						<div class="col-lg-8">
+							<div class="list-home list-grid list-grid-padding" id="content">
+								{% for article in articles %}
+									<div class="list-item block card-plain post">
+										<div class="media media-3x2 col-4 col-md-4">
+											<a class="media-content" href="{{ article.link }}" title="{{ article.title }}"><img class="index-logo-src" src="{{ url_for('static', filename='images/thumbs/') }}{{ range(1, 9) | random }}.jpeg"></a>
+										</div>
+										<div class="list-content">
+											<div class="list-body">
+												<small class="cat">{{ article.tags }}</small><a href="{{ article.link }}" title="{{ article.title }}" class="list-title text-lg h-2x">{{ article.title | truncate(length=41) }}</a>
+												<div class="list-desc d-none d-md-block text-sm text-secondary my-3">
+													<div class="h-2x ">{{ nohtml(article.content)|truncate(length=200) }}</div>
+												</div>
+											</div>
+											<div class="list-footer">
+												<div class="d-flex flex-fill align-items-center text-muted text-xs">
+													<div class="d-inline-block">{{ article.author }}</div>
+													<div class="flex-fill"></div>
+													<div>
+														<time class="mx-1">{{ article.created }}</time></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+							<ul class="pager">
+								{% if pagination.has_prev %}
+									<li class="previous"><a href="{% if keyword is defined %}{{ url_for('search') }}?s={{ keyword }}&page={{ pagination.prev_num }}{% else %}{{ url_for('index') }}?page={{ pagination.prev_num }}{% endif %}">&larr; Older</a></li> 
+								{% else %}
+									<li class="previous disabled"><a>&larr; Older</a></li>
+								{% endif %}
+								{% if pagination.has_next %}
+									<li class="next"><a href="{% if keyword is defined %}{{ url_for('search') }}?s={{ keyword }}&page={{ pagination.next_num }}{% else %}{{ url_for('index') }}?page={{ pagination.next_num }}{%endif%}">Newer &rarr;</a></li>
+								{% else %}
+									<li class="next disabled"><a>Newer &rarr;</a></li>
+								{% endif %}
+							</ul>
+						</div>
+{% endblock %}

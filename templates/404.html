@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+			<title>错误页面 - {{ title.title }} - {{ title.discription }}</title>
+{% endblock %}
+{% block content %}
+				<div class="content-error text-center h-v-75 py-5">
+					<div > 
+					<img src="{{ url_for('static', filename='images/404.png') }}">
+					</div>
+					<h1 class="display-1 font-theme">404</h1>
+					<h4 class="py-4">哎呀！ 该页面无法找到。</h4>
+					<p class="text-muted">看起来这里没有任何东西…</p>
+				</div>
+{% endblock %}
