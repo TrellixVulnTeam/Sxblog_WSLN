@@ -1,4 +1,4 @@
-# Sxblog
+# 一个个人开发的flask博客
 个人开发的flask博客
 使用了pypy，数据库为sqlite，并且使用了gunicorn和gevent启动项目，并发性能还是不错的。
 
