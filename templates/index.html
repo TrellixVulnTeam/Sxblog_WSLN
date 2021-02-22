@@ -38,8 +38,6 @@
 								{%for page in pagination.iter_pages(1,1,3,1)%}
 									{%if page%}
 										<li class="page-item {%if page==pagination.page%}active{%endif%}"><a href="{% if keyword is defined %}{{ url_for('search') }}?s={{ keyword }}&page={{page}}{% else %}{{ url_for('index') }}?page={{page}}{%endif%}" class="page-link">{{page}}</a></li>
-									{%else%}
-										<li class="page-item disabled"><a class="page-link" href="#">&hellip;</a></li>
 									{%endif%}
 								{%endfor%}
 								{% if pagination.has_next %}
